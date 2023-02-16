@@ -2,7 +2,7 @@ name: Upload Frame to Github
 on:
   push:
     branches:
-      - master
+      - main
 jobs:
   upload_frame:
     runs-on: ubuntu-latest
