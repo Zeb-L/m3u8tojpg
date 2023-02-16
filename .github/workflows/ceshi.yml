@@ -8,6 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+    - name: Install youtube-dl
+      run: npm install -g youtube-dl
     - name: Get YouTube Live Video M3U8
       run: |
         youtube-dl --format bestvideo[ext=m3u8]+bestaudio[ext=m4a] --output "%!!(MISSING)((MISSING)title)s.%!!(MISSING)((MISSING)ext)s" https://www.youtube.com/watch?v=RCp9hnp7r6Q
