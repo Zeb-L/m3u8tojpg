@@ -13,5 +13,5 @@ jobs:
         pip3 install you-get
     - name: Get YouTube Live Video M3U8
       run: |
-        you-get https://www.youtube.com/watch?v=RCp9hnp7r6Q
+        you-get https://www.youtube.com/watch?v=qItL005LUik
   
