@@ -8,16 +8,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+    - name: update
+      run: apt update -y
     - name: Install youtube-dl
-      run: npm install -g youtube-dl
+      run: pip install --upgrade youtube_dl
     - name: Get YouTube Live Video M3U8
       run: |
-        youtube-dl --format bestvideo[ext=m3u8]+bestaudio[ext=m4a] --output "%!!(MISSING)((MISSING)title)s.%!!(MISSING)((MISSING)ext)s" https://www.youtube.com/watch?v=RCp9hnp7r6Q
-    - name: Extract Frame
-      run: |
-        ffmpeg -i video.m3u8 -vf select='eq(pict_type\,I)' -vsync vfr -q:v 2 -s 640x360 -f image2 frame.jpg
-    - name: Upload Frame
-      uses: actions/upload-artifact@v2
-      with:
-        name: frame
-        path: frame.jpg
+        youtube-dl -f 249 -g https://www.youtube.com/watch?v=RCp9hnp7r6Q
+  
