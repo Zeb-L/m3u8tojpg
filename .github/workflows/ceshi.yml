@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: get html
+    - name: run
       run: |
-        curl https://www.youtube.com/watch?v=RCp9hnp7r6Q
+        ./main.py
   
