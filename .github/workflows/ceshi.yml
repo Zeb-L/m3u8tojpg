@@ -12,5 +12,5 @@ jobs:
       run: sudo pip install --upgrade youtube_dl
     - name: Get YouTube Live Video M3U8
       run: |
-        youtube-dl -f 249 -g https://www.youtube.com/watch?v=RCp9hnp7r6Q
+        youtube-dl https://www.youtube.com/watch?v=RCp9hnp7r6Q
   
