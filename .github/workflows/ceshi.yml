@@ -10,10 +10,8 @@ jobs:
     - uses: actions/checkout@v2
     - name: Install youtube-dl
       run: |
-        git update-index --chmod=+x build.cmd
-        curl -L https://yt-dl.org/latest/youtube-dl -o /usr/bin/youtube-dl
-        chmod 755 /usr/bin/youtube-dl
+        pip3 install you-get
     - name: Get YouTube Live Video M3U8
       run: |
-        youtube-dl https://www.youtube.com/watch?v=RCp9hnp7r6Q
+        you-get https://www.youtube.com/watch?v=RCp9hnp7r6Q
   
