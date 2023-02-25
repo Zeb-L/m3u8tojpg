@@ -30,7 +30,7 @@ def getsttings(num):
         contents=filecont.readlines()
     filecont.close()
     for i in range(len(contents)):
-        setting_str.append(contents[i].split("=")[1].replace("\n",""))
+        setting_str.append(contents[i].split("@bf=")[1].replace("\n",""))
     return setting_str[num]  
 
   
