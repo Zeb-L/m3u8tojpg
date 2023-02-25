@@ -3,6 +3,8 @@ import urllib.request
 import urllib.error
 import urllib.parse
 import re
+import json
+import base64
 
 def get_ua():
     import random
@@ -49,6 +51,7 @@ token = os.environ['BFtoken']
 _url = urllib.request.Request(dlurl,headers=headers)
 response = urllib.request.urlopen(_url, None, 10)
 data=response.read().decode('utf-8')
+response.close()
 # print(data)
 rule = r'data-id="(.*?)" data-is'
 vidList = re.findall(rule, data)
@@ -69,6 +72,7 @@ for vli in vidList:
 	vtitlerule = r'html5player.setVideoTitle\(\'(.*?)\'\);'
 	vtitle_ = re.findall(vtitlerule, data2)
 	vtitles.append(vtitle_[0])
+	response2.close()
 
 print(vtitles,vurls,vimgs)
 
