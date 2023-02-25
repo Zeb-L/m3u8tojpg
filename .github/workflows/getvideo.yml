@@ -1,4 +1,4 @@
-name: Get M3U8
+name: GetVideoM3u8
 on:
   push:
     branches:
@@ -8,7 +8,6 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       max-parallel: 5
-
     steps:
     - uses: actions/checkout@v3
     - name: Add conda to system path
