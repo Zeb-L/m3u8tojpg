@@ -3,6 +3,9 @@ import urllib.request
 import urllib.error
 import urllib.parse
 import re
+import sys
+reload(sys)
+sys.setdefaultencoding('utf8')
 
 def get_ua():
     import random
@@ -27,4 +30,9 @@ dlurl="https://www.xvideos.com/"
 _url = urllib.request.Request(dlurl,headers=headers)
 response = urllib.request.urlopen(_url, None, 10)
 data=response.read().decode('utf-8')
-print(data)
+# print(data)
+rule = r'data-id="(.*?)" data-is'
+vidList = re.findall(rule, data)
+print(vidList)
+
+#https://www.xvideos.com/video{vidList}/_
