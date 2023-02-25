@@ -109,8 +109,8 @@ def update_file(filename):
 
 up_live_list = update_file("gentleman.txt")
 if up_live_list != -1:
-printlog("gentleman.txt 已经更新")
+print("gentleman.txt 已经更新")
 else:
-printlog("gentleman.txt 更新失败")
+print("gentleman.txt 更新失败")
 	
 
