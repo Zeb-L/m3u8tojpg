@@ -81,7 +81,7 @@ with open("gentleman.txt","a", encoding='utf-8') as file:
 	file.write("\n")
 	for line in range(len(vtitles)):
 		file.write("#image,"+vimgs[line]+"\n")
-		file.write(vtitles[line]+","+vurls[line]+"\n")
+		file.write(vtitles[line]+","+vurls[line]+"\n\n")
 	file.close()
 	
 	
