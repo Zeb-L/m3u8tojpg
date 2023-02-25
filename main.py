@@ -26,7 +26,24 @@ headers = {'User-Agent': ua}
 vtitles=[]
 vurls=[]
 vimgs=[]
-dlurl="https://www.xvideos.com/"
+
+owner=getsttings(0)
+repo=getsttings(1)
+branch=getsttings(2)
+dlurl=getsttings(3)
+token = os.environ['BFtoken']
+
+
+def getsttings(num):
+    setting_str=[]
+    with open("./settings.txt",'r',encoding='UTF-8') as filecont:
+        contents=filecont.readlines()
+    filecont.close()
+    for i in range(len(contents)):
+        setting_str.append(contents[i].split("=")[1].replace("\n",""))
+    return setting_str[num]
+
+
 _url = urllib.request.Request(dlurl,headers=headers)
 response = urllib.request.urlopen(_url, None, 10)
 data=response.read().decode('utf-8')
@@ -37,21 +54,63 @@ vidList = re.findall(rule, data)
 #https://www.xvideos.com/video{vidList}/_
 for vli in vidList:
 	vitmeurl="https://www.xvideos.com/video"+ vli + "/_"
-	print(vitmeurl)
+	#print(vitmeurl)
 	_url2 = urllib.request.Request(vitmeurl,headers=headers)
 	response2 = urllib.request.urlopen(_url2, None, 10)
 	data2 = response2.read().decode('utf-8')
 	vm3u8rule = r'html5player.setVideoHLS\(\'(.*?)\'\);'
 	vm3u8 = re.findall(vm3u8rule, data2)
-	vurls.append(vm3u8)
+	vurls.append(vm3u8[0])
 	vimgrule = r'html5player.setThumbUrl\(\'(.*?)\'\);'
 	vimage = re.findall(vimgrule, data2)
-	vimgs.append(vimage)
+	vimgs.append(vimage[0])
 	vtitlerule = r'html5player.setVideoTitle\(\'(.*?)\'\);'
 	vtitle_ = re.findall(vtitlerule, data2)
-	vtitles.append(vtitle_)
+	vtitles.append(vtitle_[0])
+
 print(vtitles,vurls,vimgs)
+
+with open("gentleman.txt","a", encoding='utf-8') as file:
+	file.write("\n")
+	for line in range(len(vtitles)):
+		file.write("#image,"+vimgs[line]+"\n")
+		file.write(vtitles[line]+","+vurls[line]+"\n")
+	file.close()
+
+def update_file(filename):
+    global owner
+    global repo
+    global token
+    content=tobase64(filename)
+    url="https://api.github.com/repos/"+owner+"/"+repo+"/contents/"+filename
+    branchurl="https://api.github.com/repos/"+owner+"/"+repo+"/branches/"+branch
+    res=requests.get(branchurl)
+    resp=json.loads(res.text)
+    treeurl=resp["commit"]["commit"]["tree"]["url"]
+    res2 =requests.get(treeurl)
+    _cont = json.loads(res2.text)
+    all_filename = _cont["tree"]
+    sha_cont=""
+    for i in range(len(all_filename)):
+        lists_filename = all_filename[i]["path"]
+        if lists_filename == filename:
+            # print(all_filename[i]["sha"])
+            sha_cont = all_filename[i]["sha"]
+            break
+    ua = get_ua()
+    headers = {'User-Agent': ua,'Accept': 'application/vnd.github.v3+json','Authorization': 'token '+token}
+    data = {"message":"actions update","content": content,"sha":sha_cont,"branch":branch}
+    req = requests.put(url=url, data=json.dumps(data), headers=headers)
+    print(req.text)
+    return str(req).find("200")
+
+
 	
-	
+
+up_live_list = update_file("gentleman.txt")
+if up_live_list != -1:
+printlog("gentleman.txt 已经更新")
+else:
+printlog("gentleman.txt 更新失败")
 	
 
