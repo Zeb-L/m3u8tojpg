@@ -82,6 +82,14 @@ with open("gentleman.txt","a", encoding='utf-8') as file:
 		file.write("#image,"+vimgs[line]+"\n")
 		file.write(vtitles[line]+","+vurls[line]+"\n")
 	file.close()
+	
+	
+def tobase64(filename):
+    filepath = './'+filename
+    with open(filepath, 'rb') as base64_:
+        base64_str = base64.b64encode(base64_.read())
+        str0 = base64_str.decode('utf-8')
+        return str0
 
 def update_file(filename):
     global owner
