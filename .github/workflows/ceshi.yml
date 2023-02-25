@@ -1,4 +1,4 @@
-name: Get YouTube Live Video M3U8 and Frame
+name: Get M3U8
 on:
   push:
     branches:
@@ -14,5 +14,6 @@ jobs:
         echo $CONDA/bin >> $GITHUB_PATH
     - name: Running
       run: |
+        chmod +x main.py
         ./main.py
   
