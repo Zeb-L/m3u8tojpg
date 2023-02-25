@@ -23,7 +23,7 @@ def get_ua():
   
 ua = get_ua()
 headers = {'User-Agent': ua}
-dlurl="https://www.youtube.com/watch?v=RCp9hnp7r6Q"
+dlurl="https://www.xvideos.com/"
 _url = urllib.request.Request(dlurl,headers=headers)
 response = urllib.request.urlopen(_url, None, 10)
 data=response.read().decode('utf-8')
