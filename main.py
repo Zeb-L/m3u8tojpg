@@ -6,6 +6,7 @@ import re
 import json
 import base64
 import requests
+import datetime
 
 def get_ua():
     import random
@@ -98,7 +99,8 @@ def upload_file(filename):
     global token
     global branch
     content=tobase64(filename)
-    url="https://api.github.com/repos/"+owner+"/"+repo+"/contents/2-15"+filename
+    date_time = datetime.datetime.now().strftime('%Y-%m-%d')
+    url="https://api.github.com/repos/"+owner+"/"+repo+"/contents/"+date_time+"/"+filename
     ua = get_ua()
     headers = {'User-Agent': ua,'Accept': 'application/vnd.github.v3+json','Authorization': 'token '+token}
     data = {"message":"actions update","content": content,"branch":branch}
