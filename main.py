@@ -92,29 +92,16 @@ def tobase64(filename):
         str0 = base64_str.decode('utf-8')
         return str0
 
-def update_file(filename):
+def upload_file(filename):
     global owner
     global repo
     global token
+    global branch
     content=tobase64(filename)
-    url="https://api.github.com/repos/"+owner+"/"+repo+"/contents/"+filename
-    branchurl="https://api.github.com/repos/"+owner+"/"+repo+"/branches/"+branch
-    res=requests.get(branchurl)
-    resp=json.loads(res.text)
-    treeurl=resp["commit"]["commit"]["tree"]["url"]
-    res2 =requests.get(treeurl)
-    _cont = json.loads(res2.text)
-    all_filename = _cont["tree"]
-    sha_cont=""
-    for i in range(len(all_filename)):
-        lists_filename = all_filename[i]["path"]
-        if lists_filename == filename:
-            # print(all_filename[i]["sha"])
-            sha_cont = all_filename[i]["sha"]
-            break
+    url="https://api.github.com/repos/"+owner+"/"+repo+"/contents/2-15"+filename
     ua = get_ua()
     headers = {'User-Agent': ua,'Accept': 'application/vnd.github.v3+json','Authorization': 'token '+token}
-    data = {"message":"actions update","content": content,"sha":sha_cont,"branch":branch}
+    data = {"message":"actions update","content": content,"branch":branch}
     req = requests.put(url=url, data=json.dumps(data), headers=headers)
     print(req.text)
     return str(req).find("200")
@@ -122,7 +109,8 @@ def update_file(filename):
 
 	
 
-up_live_list = update_file("gentleman.txt")
+up_live_list = upload_file("gentleman.txt")
+
 if up_live_list != -1:
     print("gentleman.txt 已经更新")
 
