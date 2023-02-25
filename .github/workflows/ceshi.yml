@@ -4,8 +4,11 @@ on:
     branches:
       - main
 jobs:
-  get_video:
+  build-linux:
     runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 5
+
     steps:
     - uses: actions/checkout@v3
     - name: Add conda to system path
@@ -14,6 +17,6 @@ jobs:
         echo $CONDA/bin >> $GITHUB_PATH
     - name: Running
       run: |
-        chmod +x main.py
-        ./main.py
+        python -m pip install --upgrade pip
+        python ./main.py
   
