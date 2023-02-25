@@ -19,7 +19,16 @@ def get_ua():
     ]
     user_agent = random.choice(user_agents)
     return user_agent
-  
+
+def getsttings(num):
+    setting_str=[]
+    with open("./settings.txt",'r',encoding='UTF-8') as filecont:
+        contents=filecont.readlines()
+    filecont.close()
+    for i in range(len(contents)):
+        setting_str.append(contents[i].split("=")[1].replace("\n",""))
+    return setting_str[num]  
+
   
 ua = get_ua()
 headers = {'User-Agent': ua}
@@ -34,14 +43,7 @@ dlurl=getsttings(3)
 token = os.environ['BFtoken']
 
 
-def getsttings(num):
-    setting_str=[]
-    with open("./settings.txt",'r',encoding='UTF-8') as filecont:
-        contents=filecont.readlines()
-    filecont.close()
-    for i in range(len(contents)):
-        setting_str.append(contents[i].split("=")[1].replace("\n",""))
-    return setting_str[num]
+
 
 
 _url = urllib.request.Request(dlurl,headers=headers)
