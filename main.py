@@ -77,7 +77,7 @@ def Vurldata(dlurl):
 		vtitle_ = re.findall(vtitlerule, data2)
 		vtitles.append(vtitle_[0])
 		response2.close()
-                RT = random.randint(1,5)
+		RT = random.randint(1,3)
 		time.sleep(RT)
 
 #print(vtitles,vurls,vimgs)
