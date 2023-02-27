@@ -43,40 +43,46 @@ vimgs=[]
 owner=getsttings(0)
 repo=getsttings(1)
 branch=getsttings(2)
-dlurl=getsttings(3)
+#dlurl=getsttings(3)
 token = os.environ['BFtoken']
 
 
 
 
+def Vurldata(dlurl):
+	_url = urllib.request.Request(dlurl,headers=headers)
+	response = urllib.request.urlopen(_url, None, 10)
+	data=response.read().decode('utf-8')
+	response.close()
+	# print(data)
+	rule = r'data-id="(.*?)" data-is'
+	vidList = re.findall(rule, data)
+	#print(vidList)
+	#https://www.xvideos.com/video{vidList}/_
+	for vli in vidList:
+		vitmeurl="https://www.xvideos.com/video"+ vli + "/_"
+		#print(vitmeurl)
+		_url2 = urllib.request.Request(vitmeurl,headers=headers)
+		response2 = urllib.request.urlopen(_url2, None, 10)
+		data2 = response2.read().decode('utf-8')
+		vm3u8rule = r'html5player.setVideoHLS\(\'(.*?)\'\);'
+		vm3u8 = re.findall(vm3u8rule, data2)
+		vurls.append(vm3u8[0])
+		vimgrule = r'html5player.setThumbUrl\(\'(.*?)\'\);'
+		vimage = re.findall(vimgrule, data2)
+		vimgs.append(vimage[0])
+		vtitlerule = r'html5player.setVideoTitle\(\'(.*?)\'\);'
+		vtitle_ = re.findall(vtitlerule, data2)
+		vtitles.append(vtitle_[0])
+		response2.close()
 
-_url = urllib.request.Request(dlurl,headers=headers)
-response = urllib.request.urlopen(_url, None, 10)
-data=response.read().decode('utf-8')
-response.close()
-# print(data)
-rule = r'data-id="(.*?)" data-is'
-vidList = re.findall(rule, data)
-#print(vidList)
-#https://www.xvideos.com/video{vidList}/_
-for vli in vidList:
-	vitmeurl="https://www.xvideos.com/video"+ vli + "/_"
-	#print(vitmeurl)
-	_url2 = urllib.request.Request(vitmeurl,headers=headers)
-	response2 = urllib.request.urlopen(_url2, None, 10)
-	data2 = response2.read().decode('utf-8')
-	vm3u8rule = r'html5player.setVideoHLS\(\'(.*?)\'\);'
-	vm3u8 = re.findall(vm3u8rule, data2)
-	vurls.append(vm3u8[0])
-	vimgrule = r'html5player.setThumbUrl\(\'(.*?)\'\);'
-	vimage = re.findall(vimgrule, data2)
-	vimgs.append(vimage[0])
-	vtitlerule = r'html5player.setVideoTitle\(\'(.*?)\'\);'
-	vtitle_ = re.findall(vtitlerule, data2)
-	vtitles.append(vtitle_[0])
-	response2.close()
+#print(vtitles,vurls,vimgs)
 
-print(vtitles,vurls,vimgs)
+with open("./data.txt",'r',encoding='UTF-8') as filecont:    
+	datalists = filecont.readlines()
+	filecont.close()
+for i in range(len(datalists)):
+	Vurldata(datalists[i])
 
 with open("gentleman.txt","a", encoding='utf-8') as file:
 	file.write("\n")
