@@ -77,7 +77,7 @@ def Vurldata(dlurl):
 		vtitle_ = re.findall(vtitlerule, data2)
 		vtitles.append(vtitle_[0])
 		response2.close()
-		RT = random.randint(1,3)
+		RT = random.randint(1,2)
 		time.sleep(RT)
 
 #print(vtitles,vurls,vimgs)
@@ -86,6 +86,8 @@ with open("./data.txt",'r',encoding='UTF-8') as filecont:
 	datalists = filecont.readlines()
 	filecont.close()
 for i in range(len(datalists)):
+	rt2 = random.randint(5,10)
+	time.sleep(rt2)
 	Vurldata(datalists[i])
 
 with open("gentleman.txt","a", encoding='utf-8') as file:
