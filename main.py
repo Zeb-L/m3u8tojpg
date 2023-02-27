@@ -7,6 +7,8 @@ import json
 import base64
 import requests
 import datetime
+import time
+import random
 
 def get_ua():
     import random
@@ -75,6 +77,8 @@ def Vurldata(dlurl):
 		vtitle_ = re.findall(vtitlerule, data2)
 		vtitles.append(vtitle_[0])
 		response2.close()
+                RT = random.randint(1,5)
+		time.sleep(RT)
 
 #print(vtitles,vurls,vimgs)
 
