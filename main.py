@@ -2,6 +2,7 @@ import os
 import urllib.request
 import urllib.error
 import urllib.parse
+import wget
 import re
 import json
 import base64
@@ -39,10 +40,12 @@ def Vurldata(dlurl):
 	response = urllib.request.urlopen(_url, None, 10)
 	data=response.read().decode('utf-8')
 	response.close()
-	print(data)
+	#print(data)
 	rule = r'hlsManifestUrl":"(.*?)"}'
 	vidList = re.findall(rule, data)
-	print(vidList)
+	print(vidList[0])
+	file_name = wget.download(vidList[0])
+	print(file_name)
 # 	#https://www.xvideos.com/video{vidList}/_
 # 	for vli in vidList:
 # 		vitmeurl="https://www.xvideos.com/video"+ vli + "/_"
