@@ -22,8 +22,8 @@ jobs:
     - name: Running
       run:
         python -m pip install --upgrade pip
-        pip install youtube-dl
-        youtube-dl 'https://www.youtube.com/watch?v=RCp9hnp7r6Q'
+        pip install yt-dlp
+        yt-dlp --get-url 'https://www.youtube.com/watch?v=RCp9hnp7r6Q'
       env:
         BFtoken: ${{ secrets.TOKEN }}
   
