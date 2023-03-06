@@ -1,7 +1,7 @@
 name: GetVideoM3u8
 on:
   push:
-    branches: [ main ]
+    branches: [ main2 ]
   #schedule:
     #- cron: '0 20 * * *'
 env:
@@ -21,6 +21,7 @@ jobs:
     - name: Running
       run: |
         python -m pip install --upgrade pip
+        pip install wget
         pip install requests
         python ./main.py
       env:
