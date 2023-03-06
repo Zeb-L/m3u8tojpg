@@ -40,7 +40,7 @@ def Vurldata(dlurl):
 	response = urllib.request.urlopen(_url, None, 10)
 	data=response.read().decode('utf-8')
 	response.close()
-	#print(data)
+	print(data)
 	rule = r'hlsManifestUrl":"(.*?)"}'
 	vidList = re.findall(rule, data)
 	print(vidList[0])
