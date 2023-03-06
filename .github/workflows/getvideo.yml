@@ -16,6 +16,8 @@ jobs:
         echo $CONDA/bin >> $GITHUB_PATH
     - name: Running
       run: |
+        apt update -y
+        apt install FFmpeg
         python -m pip install --upgrade pip
         pip install yt-dlp
         yt-dlp 'https://www.youtube.com/watch?v=RCp9hnp7r6Q'
