@@ -6,7 +6,6 @@ on:
 jobs:
   build-linux:
     runs-on: ubuntu-latest
-    permissions: read-all|write-all
     strategy:
       max-parallel: 5
     steps:
