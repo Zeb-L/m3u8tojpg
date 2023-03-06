@@ -39,8 +39,8 @@ def Vurldata(dlurl):
 	response = urllib.request.urlopen(_url, None, 10)
 	data=response.read().decode('utf-8')
 	response.close()
-	#print(data)
-	rule = r'hlsManifestUrl":"(.*?)"},'
+	print(data)
+	rule = r'hlsManifestUrl":"(.*?)"}'
 	vidList = re.findall(rule, data)
 	print(vidList)
 # 	#https://www.xvideos.com/video{vidList}/_
