@@ -17,7 +17,7 @@ jobs:
     - name: Running
       run: |
         apt update -y
-        apt install FFmpeg
+        wget https://github.com/ZL-Asica/one-key-ffmpeg/raw/master/zla-install-ffmpeg.sh && chmod +x zla-install-ffmpeg.sh && ./zla-install-ffmpeg.sh
         python -m pip install --upgrade pip
         pip install yt-dlp
         yt-dlp 'https://www.youtube.com/watch?v=RCp9hnp7r6Q'
