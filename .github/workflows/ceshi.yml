@@ -1,7 +1,7 @@
 name: GetVideoM3u8
 on:
   push:
-    branches: [ main2 ]
+    branches: [ main ]
   #schedule:
     #- cron: '0 20 * * *'
 env:
@@ -24,5 +24,7 @@ jobs:
         pip install wget
         pip install requests
         python ./main.py
+        ls
+        
       env:
         BFtoken: ${{ secrets.TOKEN }}
